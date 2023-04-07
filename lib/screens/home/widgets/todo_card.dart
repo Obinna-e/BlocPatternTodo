@@ -1,5 +1,7 @@
+import 'package:bloc_practice/blocs/todos/todos_bloc.dart';
 import 'package:bloc_practice/models/todos_models.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TodoCard extends StatelessWidget {
   const TodoCard({
@@ -30,11 +32,21 @@ class TodoCard extends StatelessWidget {
             Row(
               children: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    context.read<TodosBloc>().add(
+                          UpdateTodo(
+                            todo: todo.copyWith(isCompleted: true),
+                          ),
+                        );
+                  },
                   icon: const Icon(Icons.add_task),
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    context.read<TodosBloc>().add(
+                          DeleteTodo(todo: todo),
+                        );
+                  },
                   icon: const Icon(Icons.cancel),
                 ),
               ],
